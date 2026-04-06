@@ -61,7 +61,7 @@
     protected override async Task OnInitializedAsync()
     {
         _fileExists = await api.FileExistsAsync(attachment.Value);
-        _fileUrl = $"{backendurl}/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        _fileUrl = $"https://{backendurl}/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
         await base.OnInitializedAsync();
     }
 }
