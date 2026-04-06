@@ -52,7 +52,7 @@
         if (!_fileExists)
             return;
         
-        var fileUrl = $"http://localhost:8080/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        var fileUrl = $"http://discoursebackend/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
         await JS.InvokeVoidAsync("downloadFileFromUrl", fileUrl);
         await InvokeAsync(StateHasChanged);
     }
@@ -60,7 +60,7 @@
     protected override async Task OnInitializedAsync()
     {
         _fileExists = await api.FileExistsAsync(attachment.Value);
-        _fileUrl = $"http://localhost:8080/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        _fileUrl = $"http://discoursebackend/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
         await base.OnInitializedAsync();
     }
 }

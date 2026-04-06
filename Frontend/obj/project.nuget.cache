@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NC4x0kGZWkE=",
+  "dgSpecHash": "+YXNKQk0sKc=",
   "success": true,
   "projectFilePath": "/home/garret/RiderProjects/Discourse/Frontend/BlazorApp2.csproj",
   "expectedPackageFiles": [
-    "/home/garret/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.4/microsoft.aspnetcore.app.internal.assets.10.0.4.nupkg.sha512"
+    "/home/garret/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.5/microsoft.aspnetcore.app.internal.assets.10.0.5.nupkg.sha512"
   ],
   "logs": []
 }
