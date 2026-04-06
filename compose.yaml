@@ -49,5 +49,7 @@
             - 5138:8080
         volumes:
             - /home/garret/Downloads/DiscourseFiles/:/uploads
+        environment:
+            BACKEND_URL: your.domain
 volumes:
   db-data:

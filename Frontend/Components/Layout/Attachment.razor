@@ -46,13 +46,14 @@
 
     private bool _fileExists = true;
     private string _fileUrl = "";
+    private string backendurl = Environment.GetEnvironmentVariable("BACKEND_URL") + "";
     
     private async Task DownloadFile()
     {
         if (!_fileExists)
             return;
         
-        var fileUrl = $"http://discoursebackend/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        var fileUrl = $"http://{backendurl}/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
         await JS.InvokeVoidAsync("downloadFileFromUrl", fileUrl);
         await InvokeAsync(StateHasChanged);
     }
@@ -60,7 +61,7 @@
     protected override async Task OnInitializedAsync()
     {
         _fileExists = await api.FileExistsAsync(attachment.Value);
-        _fileUrl = $"http://discoursebackend/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        _fileUrl = $"http://{backendurl}/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
         await base.OnInitializedAsync();
     }
 }
