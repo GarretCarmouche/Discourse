@@ -53,7 +53,7 @@
         if (!_fileExists)
             return;
         
-        var fileUrl = $"{backendurl}/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        var fileUrl = $"https://{backendurl}/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
         await JS.InvokeVoidAsync("downloadFileFromUrl", fileUrl);
         await InvokeAsync(StateHasChanged);
     }
