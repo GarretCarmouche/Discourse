@@ -33,6 +33,7 @@
             - 5050:8080
         environment:
             FILE_UPLOAD_LOCATION: /uploads
+            DB_PASSWORD: root
         volumes:
             - /home/garret/Downloads/DiscourseFiles/:/uploads
     discoursefrontend:

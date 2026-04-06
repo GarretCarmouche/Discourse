@@ -9,7 +9,7 @@ namespace DiscourseBackend;
 
 public class API
 {
-    static readonly string ConnString = "Host=db;Username=postgres;Password=root;Database=postgres";
+    static readonly string ConnString = $"Host=db;Username=postgres;Password={Environment.GetEnvironmentVariable("DB_PASSWORD")};Database=postgres";
     private static readonly string fileUploadLocation = Environment.GetEnvironmentVariable("FILE_UPLOAD_LOCATION")!;
     private static Dictionary<string, string> _authTokens = new();
     private static Dictionary<string, int> _authTokensById = new();
