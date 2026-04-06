@@ -1,0 +1,66 @@
+@inject API api
+@rendermode InteractiveServer
+@inject IJSRuntime JS
+
+    @if (@attachment.Key.EndsWith(".png") || @attachment.Key.EndsWith(".jpg") || @attachment.Key.EndsWith(".jpeg"))
+    {
+        <img src="@_fileUrl" style="height: 250px; cursor: pointer" @onclick="DownloadFile"/>
+    }
+    else if (@attachment.Key.EndsWith(".webm") || @attachment.Key.EndsWith(".mp4"))
+    {
+        <video src="@_fileUrl" style="height: 250px; cursor: pointer" @onclick="DownloadFile" autoplay="autoplay" muted loop="loop"></video>
+    }
+    else
+    {
+        <div class="attachment">
+            @if (_fileExists)
+            {
+                <svg class="attachment-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M14 2H6c-1.11 0-2 .89-2 2v16c0 1.11.89 2 2 2h12c1.11 0 2-.89 2-2V8zm-2 17l-4-4h2.5v-3h3v3H16zm1-10V3.5L18.5 9z"/></svg>
+            }
+            else
+            {
+                <svg class="attachment-icon" style="height: 75%; padding-left: 3px; padding-right: 3px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M10 3.5v-3c0-.28-.22-.5-.5-.5H2c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5.5c0-.28-.22-.5-.5-.5h-3c-.83 0-1.5-.67-1.5-1.5m.94 8.56c.24.24.24.64 0 .88c-.12.12-.28.18-.44.18s-.32-.06-.44-.18L8 10.88l-2.06 2.06c-.12.12-.28.18-.44.18s-.32-.06-.44-.18a.63.63 0 0 1 0-.88L7.12 10L5.06 7.94c-.24-.24-.24-.64 0-.88s.64-.24.88 0L8 9.12l2.06-2.06c.24-.24.64-.24.88 0s.24.64 0 .88L8.88 10zM11 .5V3c0 .55.45 1 1 1h2.5c.45 0 .67-.54.35-.85l-3-3C11.54-.17 11 .06 11 .5"/></svg>
+            }
+        
+            <text style="color: white ">@attachment.Key</text>
+            <button @onclick="DownloadFile" class="download-button"></button>
+            
+        </div>
+    }
+    
+
+
+<script>
+    window.downloadFileFromUrl = (url) => {
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = '';
+        anchor.click();
+        anchor.remove();
+    };
+</script>
+@code {
+
+    [Parameter] 
+    public KeyValuePair<string, string> attachment { get; set; }
+
+    private bool _fileExists = true;
+    private string _fileUrl = "";
+    
+    private async Task DownloadFile()
+    {
+        if (!_fileExists)
+            return;
+        
+        var fileUrl = $"http://localhost:8080/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        await JS.InvokeVoidAsync("downloadFileFromUrl", fileUrl);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _fileExists = await api.FileExistsAsync(attachment.Value);
+        _fileUrl = $"http://localhost:8080/downloadFile?filename={attachment.Key}&filepath={attachment.Value}&authToken={api.authToken}";
+        await base.OnInitializedAsync();
+    }
+}

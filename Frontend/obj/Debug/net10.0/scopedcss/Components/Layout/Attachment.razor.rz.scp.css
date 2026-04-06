@@ -1,0 +1,26 @@
+.attachment[b-aypw04oxcu]{
+    background-color: #29292D;
+    height: 6vh;
+    aspect-ratio: 6;
+    border-radius: 1vh;
+    border-color: #39393D;
+    border-width: 1px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.attachment-icon[b-aypw04oxcu]{
+    color: white;
+    height: 80%;
+    aspect-ratio: 1;
+}
+
+.download-button[b-aypw04oxcu]{
+    position: absolute;
+    height: 6vh;
+    aspect-ratio: 6;
+    background: none;
+    border: none;
+}

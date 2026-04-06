@@ -1,0 +1,167 @@
+@rendermode InteractiveServer
+@implements IDisposable
+@inject API api
+<div class="chat-window">
+    <div class="chat-history">
+        @if (CurrentUser != null)
+        {
+            @foreach (Message message in Messages ?? [])
+            {
+                <UserMessage CurrentMessage="@message"></UserMessage>
+            }
+        }
+    </div>
+    
+    @if (CurrentUser != null)
+    {
+        <div style="background-color: #202023; height: @_fieldHeight">
+            <div class="message-box">
+                @foreach (KeyValuePair<string, string> attachment in filesAttached)
+                {
+                    <div class="attachment">
+                        <svg class="attachment-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M13 9V3.5L18.5 9M6 2c-1.11 0-2 .89-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/></svg>
+                        <text class="attachment-label">@attachment.Key</text>
+                        </div>    
+                }
+                
+                @if (CurrentUser != null && CurrentUser.Id == api.GetCurrentUser()!.Id)
+                {
+                    <textarea style="height: @_textHeight" class="text-field" @onkeydown="InputKeyDown" @onkeyup="InputKeyUp" @bind="MessageText" @bind:event="oninput" placeholder="Save notes to yourself here"></textarea>
+                }
+
+                @if (CurrentUser != null && CurrentUser.Id != api.GetCurrentUser()!.Id)
+                {
+                    <textarea style="height: @_textHeight" class="text-field" @onkeydown="InputKeyDown" @onkeyup="InputKeyUp" @bind="MessageText" @bind:event="oninput" placeholder="Message @CurrentUser.UserName"></textarea>
+                }
+
+                <label for="file-upload" class="file-upload-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16zm-5 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/></svg>
+                </label>
+                <InputFile id="file-upload" style="display: none" OnChange="LoadFilesAsync"></InputFile>
+            </div>
+        </div>
+    }
+    
+</div>
+
+@code {
+    [Parameter]
+    public User? CurrentUser { get; set; }
+
+    private string MessageText { get; set; } = "";
+
+    private string _fieldHeight = "50px";
+    private string _textHeight = "calc(100% - 10px)";
+    
+    private List<Message>? Messages { get; set; }
+    
+    System.Timers.Timer _timer = new System.Timers.Timer();
+    Dictionary<string, string> filesAttached = [];
+
+    public void Dispose()
+    {
+        _timer.Dispose();
+    }
+    
+    public async void SetUserAsync(User user)
+    {
+        CurrentUser = user;
+        if (CurrentUser != null)
+        {
+            Messages = await api.GetMessagesAsync(CurrentUser);
+        }
+        
+        StateHasChanged();
+    }
+
+    private void InputKeyDown(KeyboardEventArgs e)
+    {
+        
+        if (e.ShiftKey)
+            return;
+        
+        if (e.Key != "Enter")
+            return;
+
+        if (CurrentUser == null)
+            return;
+
+        if (filesAttached.Count() > 0)
+        {
+            api.SendMessageWithAttachmentsAsync(CurrentUser, MessageText, filesAttached).ContinueWith(async task =>
+            {
+                Messages = await api.GetMessagesAsync(CurrentUser);
+            });
+        }
+        else
+        {
+            api.SendMessageAsync(CurrentUser, MessageText).ContinueWith(async task =>
+            {
+                Messages = await api.GetMessagesAsync(CurrentUser);
+            });
+        }
+        
+        
+        MessageText = "";
+        filesAttached.Clear();
+        UpdateFieldHeight();
+        StateHasChanged();
+    }
+
+    private void UpdateFieldHeight()
+    {
+        int lines = MessageText.Split('\n').Length - 1;
+        lines = Math.Clamp(lines, 0, 10);
+        _fieldHeight = (50 + (lines * 24) + (filesAttached.Any() ? 140 : 0)) + "px";
+        _textHeight = $"calc(100% - {(filesAttached.Any() ? 142 : 10)}px)";
+    }
+    
+    private void InputKeyUp(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey)
+            MessageText = "";
+        
+        UpdateFieldHeight();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _timer.Interval = 500;
+        _timer.Elapsed += async (sender, args) =>
+        {
+            if (CurrentUser != null && Messages!= null)
+            {
+                int highestId = Messages.Any() ? Messages.Max(m => m.Id) : -1;
+                if (await api.DoesMessageExistAfterAsync(CurrentUser, highestId))
+                {
+                    Messages = await api.GetMessagesAsync(CurrentUser);
+                    api.MarkMessagesReadAsync(CurrentUser);
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+        };
+        
+        _timer.Start();
+        
+        await base.OnInitializedAsync();
+    }
+
+    public async Task LoadFilesAsync(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles())
+        {
+            var trustedFileName = Path.GetRandomFileName();
+            var path = Path.Combine("/uploads/",
+                trustedFileName);
+
+            Console.WriteLine("Create file stream");
+            await using FileStream fs = new(path, FileMode.Create);
+            Console.WriteLine("Copy to stream");
+            await file.OpenReadStream(1049000000L).CopyToAsync(fs);
+            Console.WriteLine($"Add files attached {file.Name} {trustedFileName}");
+            filesAttached.Add(file.Name, trustedFileName);
+        }
+        
+        UpdateFieldHeight();
+    }
+}

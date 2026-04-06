@@ -1,0 +1,9 @@
+.friends-list[b-3mp37sdo0u]{
+    background-color: #19191B;
+    width: 17.7%;
+    height: calc(100% - 10px);
+    overflow-y:scroll;
+    scrollbar-color: #66676F #19191B;
+    margin-left: 10px;
+    margin-top:10px;
+}

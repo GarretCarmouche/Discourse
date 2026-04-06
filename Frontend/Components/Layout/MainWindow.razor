@@ -1,0 +1,33 @@
+@rendermode InteractiveServer
+
+<div class="main-window">
+    <div class="window-content">
+        <FriendsList OnFriendSelected="SetUser"></FriendsList>
+        <UserChatWindow CurrentUser="@_currentUser" @ref="_userChatWindow"></UserChatWindow>
+    </div>
+</div>
+
+@code {
+    
+    private User? _currentUser;
+    
+    private UserChatWindow _userChatWindow;
+
+    public void SetUser(User user)
+    {
+        _currentUser = user;
+        StateHasChanged();
+        _userChatWindow.SetUserAsync(user);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+    
+}

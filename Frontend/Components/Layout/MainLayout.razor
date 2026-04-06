@@ -1,0 +1,32 @@
+﻿@inherits LayoutComponentBase
+@inject API api
+
+@if (api.GetCurrentUser() == null)
+{
+    <div class="background">
+        <Login LoginCallback="LoginSuccessful"></Login>
+    </div>
+}
+else
+{
+    <div class="top-row">
+        <text style="color: #959598">Friends</text>
+    </div>
+    <div style="display: flex; height: 97vh">
+        <div class="sidebar">
+            <ServerBrowser></ServerBrowser>
+        </div>
+        <MainWindow></MainWindow>
+        <ControlsLabel></ControlsLabel>
+    </div>
+}
+
+
+@code{
+
+    private void LoginSuccessful()
+    {
+        Console.WriteLine("MainLayout login success");
+        StateHasChanged();
+    }
+}

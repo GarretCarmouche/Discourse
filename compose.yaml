@@ -1,0 +1,52 @@
+﻿services:
+    db:
+        image: postgres
+        restart: always
+        user: postgres
+        volumes:
+            - db-data:/var/lib/postgresql/MAJOR/docker
+        environment:
+            - POSTGRES_DB=authentication
+            - POSTGRES_PASSWORD=root
+        expose:
+            - 5432
+        ports:
+            - 5432:5432
+        healthcheck:
+            test: [ "CMD", "pg_isready" ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+    discoursebackend:
+        image: discoursebackend
+        build:
+            context: ./Backend
+            dockerfile: Dockerfile
+        depends_on:
+            db:
+                condition: service_healthy
+        expose:
+            - 5049
+            - 8080
+        ports:
+            - 5049:5049
+            - 5050:8080
+        environment:
+            FILE_UPLOAD_LOCATION: /uploads
+        volumes:
+            - /home/garret/Downloads/DiscourseFiles/:/uploads
+    discoursefrontend:
+        image: discoursefrontend
+        build:
+            context: ./Frontend
+            dockerfile: Dockerfile
+        expose:
+            - 5137
+            - 8080
+        ports:
+            - 5137:5137
+            - 5138:8080
+        volumes:
+            - /home/garret/Downloads/DiscourseFiles/:/uploads
+volumes:
+  db-data:

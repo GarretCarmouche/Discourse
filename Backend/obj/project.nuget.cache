@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8hxn8U/9Y80=",
+  "success": true,
+  "projectFilePath": "/home/garret/RiderProjects/Discourse/Backend/DiscourseBackend.csproj",
+  "expectedPackageFiles": [
+    "/home/garret/.nuget/packages/npgsql/10.0.2/npgsql.10.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

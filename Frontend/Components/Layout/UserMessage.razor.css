@@ -1,0 +1,17 @@
+.user-message{
+    display: flex;
+    background-color: #202023;
+    margin-top: 8px;
+}
+
+.user-icon{
+    border-radius: 50%;
+    background-color: white;
+    aspect-ratio: 1;
+    height: 70%;
+    margin-left: 10px;
+    margin-top: 10%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}

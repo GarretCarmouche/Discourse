@@ -1,0 +1,36 @@
+@rendermode InteractiveServer
+@if (CurrentMessage != null && @CurrentMessage.Username.Length > 0)
+{
+    <div class="user-message">
+        <div style="height: 9vh; aspect-ratio: 1">
+            <div class="user-icon">@CurrentMessage.Username.Substring(0, 1).ToUpper()</div>
+        </div>
+        <div style="flex-direction: column; display:flex">
+            <div style="width: 100%">
+                <text style="color: white; margin-top: 0.5%">@CurrentMessage.Username</text>
+                <text style="margin-left: 5px; color: #94959C; margin-top: 0.5%;">@CurrentMessage.Date.ToShortTimeString()</text>
+            </div>
+            @foreach (KeyValuePair<string, string> attachment in CurrentMessage.Attachments)
+            {
+                <Attachment attachment="attachment"></Attachment>
+            }
+            <div>
+                <text style="color: white; white-space: pre-wrap">
+                    @((MarkupString)CurrentMessage.Content)
+                </text>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public Message CurrentMessage { get; set; } = new Message();
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+}

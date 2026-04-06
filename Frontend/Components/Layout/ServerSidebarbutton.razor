@@ -1,0 +1,21 @@
+@rendermode InteractiveServer
+<button class="circle-button" @onmouseenter="MouseOver" @onmouseleave="MouseOut" style="background-color: @currentColor">
+    <svg style="height: 100%; width: 100%" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" d="M6 5h4c.554 0 1 .446 1 1v4c0 .554-.446 1-1 1H6c-.554 0-1-.446-1-1V6c0-.554.446-1 1-1"/></svg>
+</button>
+
+@code {
+
+    string hoveringColor = "#28282A";
+    string defaultColor = "#232325";
+    string currentColor = "#232325";
+
+    private void MouseOver()
+    {
+        currentColor = hoveringColor;
+    }
+
+    private void MouseOut()
+    {
+        currentColor = defaultColor;
+    }
+}

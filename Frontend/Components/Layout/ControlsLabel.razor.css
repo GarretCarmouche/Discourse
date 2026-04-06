@@ -1,0 +1,120 @@
+.controls-label{
+    background-color: #28282A;
+    width: 20vw;
+    height: 7vh;
+    position: absolute;
+    margin-top: 87vh;
+    margin-left: 1.75vw;
+    border-radius: 1vw;
+    display: flex;
+    align-items: center;
+}
+
+.user-icon{
+    border-radius: 50%;
+    background-color: white;
+    aspect-ratio: 1;
+    height: 70%;
+    margin-left: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.settings-icon{
+    height: 75%;
+    aspect-ratio: 1;
+    color: white;
+    margin-left: 65%;
+    cursor: pointer;
+}
+
+.settings-menu{
+    background-color: #28282A;
+    width: 60vw;
+    height: 80vh;
+    position: absolute;
+    margin-top: 5vh;
+    margin-left: 20vw;
+    border-radius: 1vw;
+    display: flex;
+}
+
+.settings-sidebar{
+    background-color: #19191B;
+    height: 100%;
+    width: 25%;
+    border-bottom-left-radius: 1vw;
+    border-top-left-radius: 1vw;
+    border-color: white;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 0;
+    border-style: solid;
+}
+
+.settings-content{
+    background-color: #28282A;
+    height: 100%;
+    width: 75%;
+    border-top-right-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    border-color: white;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-left-width: 0;
+    border-style: solid;
+}
+
+.settings-category{
+    color: white;
+    height: 5vh;
+    margin-top: 5px;
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.settings-category-icon{
+    color: white;
+    height: 70%;
+    aspect-ratio: 1;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.text-field{
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    width:50%;
+    height:20%;
+    background-color: #19191B;
+    margin-bottom: 3%;
+    align-self: center;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+}
+
+.text-label{
+    color: white;
+    margin-left: 10px;
+}
+
+.button{
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    aspect-ratio: 3.5;
+    height: 5vh;
+    align-self: center;
+    border-radius: 10px;
+    border: none;
+    background-color: #5965F1;
+    margin-left: 10px;
+}

@@ -1,0 +1,42 @@
+@rendermode InteractiveServer
+@inject API api;
+
+<div class="login-background">
+    <div class="login-content">
+        <text class="label">Username</text>
+        <input type="text" @bind="Username" class="text-field"/>
+        <text class="label">Password</text>
+        <input type="password" @bind="Password" @onkeydown="PasswordKeyDownAsync" @bind:event="oninput" class="text-field"/>
+        <button class="login-button" @onclick="LoginClickedAsync">Login</button>
+        
+        @if (_loginFailure)
+        {
+            <div class="label" style="color: red; margin-top: 5%">Incorrect username or password</div>
+        }
+    </div>
+</div>
+
+@code {
+    private string Username { get; set; } = "";
+    private string Password { get; set; } = "";
+    private bool _loginFailure = false;
+    
+    [Parameter]
+    public EventCallback LoginCallback { get; set; }
+    
+    private async Task LoginClickedAsync()
+    {
+        _loginFailure = !(await api.LoginAsync(Username, Password));
+        if (!_loginFailure)
+        {
+            await LoginCallback.InvokeAsync();
+        }
+    }
+
+    private  async Task PasswordKeyDownAsync(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+            await LoginClickedAsync();
+    }
+
+}

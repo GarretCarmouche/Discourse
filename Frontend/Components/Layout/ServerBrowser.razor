@@ -1,0 +1,13 @@
+@rendermode InteractiveServer
+<div>
+    <FriendsSidebarButton></FriendsSidebarButton>
+    @foreach (string serverName in GetServers())
+    {
+        <ServerSidebarbutton></ServerSidebarbutton>
+    }
+
+</div>
+
+@code {
+    
+}

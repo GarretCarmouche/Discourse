@@ -1,0 +1,99 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = BlazorApp2
+build_property.RootNamespace = BlazorApp2
+build_property.ProjectDir = /home/garret/RiderProjects/Discourse/Frontend/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/garret/RiderProjects/Discourse/Frontend
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Pages/NotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ob3RGb3VuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/Attachment.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQXR0YWNobWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-aypw04oxcu
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/ControlsLabel.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQ29udHJvbHNMYWJlbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ec1r38u2m9
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/FriendsList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvRnJpZW5kc0xpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-3mp37sdo0u
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/FriendsSidebarButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvRnJpZW5kc1NpZGViYXJCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-mhi0g0tazs
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-yinf5fie8m
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gnv29mi9so
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/MainWindow.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbldpbmRvdy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-1z07iazdjz
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/MessageFriend.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWVzc2FnZUZyaWVuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-i33proe1mj
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-8m0out2oi0
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/ReconnectModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvUmVjb25uZWN0TW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-gqzxv9688p
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/ServerBrowser.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvU2VydmVyQnJvd3Nlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ztdfd46f2s
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/ServerSidebarbutton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvU2VydmVyU2lkZWJhcmJ1dHRvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-fi3bhzjylp
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/UserChatWindow.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvVXNlckNoYXRXaW5kb3cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-r2imhdjbxz
+
+[/home/garret/RiderProjects/Discourse/Frontend/Components/Layout/UserMessage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvVXNlck1lc3NhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ifoop0zdsc

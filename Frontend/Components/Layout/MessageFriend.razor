@@ -1,0 +1,66 @@
+@rendermode InteractiveServer
+@inject API api
+@implements IDisposable
+
+<button class="message-friend" style="background-color: @currentColor" @onmouseover="MouseOver" @onmouseleave="MouseLeave" @onclick="OnActivate">
+    <div style="width: 100%; height: 100%; display:flex">
+        <div class="user-icon">@CurrentUser.UserName.Substring(0, 1).ToUpper()</div>
+        <text style="color: #94959C; margin-left: 5px; align-content: center;">@CurrentUser.UserName</text>
+        @if (_unreadMessages > 0)
+        {
+            <div class="unread-icon">@_unreadMessages</div>
+        }
+        
+    </div>
+</button>
+
+@code {
+    [Parameter]
+    public User CurrentUser { get; set; }
+    
+    [Parameter]
+    public EventCallback<User> OnButtonClick { get; set; }
+
+    [Parameter]
+    public bool UserSelected { get; set; }
+    
+    string hoveringColor = "#28282A";
+    string defaultColor = "#19191B";
+    string currentColor = "#19191B";
+    string text = "T";
+    int _unreadMessages;
+    System.Timers.Timer _unreadMessageTimer = new System.Timers.Timer();
+
+    public void Dispose()
+    {
+        _unreadMessageTimer.Dispose();
+    }
+
+    private void MouseOver()
+    {
+        currentColor = hoveringColor;
+    }
+
+    private void MouseLeave()
+    {
+        currentColor = defaultColor;
+    }
+
+    private async void OnActivate()
+    {
+        await OnButtonClick.InvokeAsync(CurrentUser);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _unreadMessageTimer.Interval = 1000;
+        _unreadMessageTimer.Start();
+        _unreadMessageTimer.Elapsed += async (sender, args) =>
+        {
+            _unreadMessages = !UserSelected ? await api.GetUnreadMessageCount(CurrentUser) : 0;
+            await InvokeAsync(StateHasChanged);
+        };
+    }
+
+}

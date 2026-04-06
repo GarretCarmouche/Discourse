@@ -1,0 +1,55 @@
+@rendermode InteractiveServer
+@implements IDisposable
+@inject API api
+<div class="friends-list">
+    @foreach (User user in Friends ?? [])
+    {
+        @if (_selectedUser != null && user.Id == _selectedUser.Id)
+        {
+            <MessageFriend UserSelected="@true" CurrentUser="@user" OnButtonClick="FriendSelectedAsync"></MessageFriend>
+        }
+        else
+        {
+            <MessageFriend UserSelected="@false" CurrentUser="@user" OnButtonClick="FriendSelectedAsync"></MessageFriend>
+        }
+        
+    }
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<User> OnFriendSelected { get; set; }
+
+    [Parameter]
+    public List<User>? Friends { get; set; }
+    
+    System.Timers.Timer _timer = new System.Timers.Timer();
+    User? _selectedUser;
+    
+    private async Task FriendSelectedAsync(User user)
+    {
+        OnFriendSelected.InvokeAsync(user);
+        api.MarkMessagesReadAsync(user);
+        _selectedUser = user;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+     _timer.Dispose();   
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        
+        _timer.Interval = 1000;
+        _timer.Start();
+        _timer.Elapsed += async (sender, args) =>
+        {
+            Friends = await api.GetFriendsSortedAsync();
+            await InvokeAsync(StateHasChanged);
+        };
+        Friends = await api.GetFriendsSortedAsync();
+    }
+}

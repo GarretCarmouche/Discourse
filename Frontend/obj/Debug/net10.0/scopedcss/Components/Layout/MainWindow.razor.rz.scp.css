@@ -1,0 +1,17 @@
+.main-window[b-1z07iazdjz]{
+    flex: 1;
+    background-color: #19191B;
+}
+
+.window-content[b-1z07iazdjz]{
+    width: 100%;
+    height: 100%;
+    border-style: solid;
+    border-top-left-radius: 1%;
+    border-left-width: 2px;
+    border-top-width: 2px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-color: #242427;
+    display:flex;
+}
